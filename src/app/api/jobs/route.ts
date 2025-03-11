@@ -8,8 +8,32 @@ export async function GET(req: NextRequest) {
   try {
     await dbConnect();
     
-    // Get the 20 most recent jobs
-    const jobs = await Job.find({})
+    // Get search parameters from URL
+    const url = new URL(req.url);
+    const searchQuery = url.searchParams.get('search') || '';
+    const category = url.searchParams.get('category') || '';
+    
+    // Build the query
+    const query: any = {};
+    
+    // Add search query if provided
+    if (searchQuery) {
+      // Search in title and description
+      query.$or = [
+        { title: { $regex: searchQuery, $options: 'i' } },
+        { description: { $regex: searchQuery, $options: 'i' } }
+      ];
+    }
+    
+    // Add category filter if provided
+    if (category && category !== 'All') {
+      query.category = category;
+    }
+    
+    console.log('Search query:', JSON.stringify(query));
+    
+    // Get the 20 most recent jobs that match the query
+    const jobs = await Job.find(query)
       .sort({ createdAt: -1 })
       .limit(20)
       .lean();

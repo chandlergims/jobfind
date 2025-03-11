@@ -35,6 +35,7 @@ function SearchParamsWrapper({ setIsModalOpen }: { setIsModalOpen: (open: boolea
 export default function JobsPage() {
   const { isAuthenticated, token } = useAuth();
   const [searchQuery, setSearchQuery] = useState('');
+  const [debouncedSearchQuery, setDebouncedSearchQuery] = useState('');
   const [selectedCategory, setSelectedCategory] = useState<string | null>(null);
   const [isModalOpen, setIsModalOpen] = useState(false);
   const [jobs, setJobs] = useState<Job[]>([]);
@@ -62,12 +63,41 @@ export default function JobsPage() {
     </Suspense>
   );
   
+  // Debounce search query
+  useEffect(() => {
+    const timer = setTimeout(() => {
+      setDebouncedSearchQuery(searchQuery);
+    }, 500); // 500ms delay
+    
+    return () => clearTimeout(timer);
+  }, [searchQuery]);
+  
   // Fetch jobs from the backend
   useEffect(() => {
     const fetchJobs = async () => {
       try {
         setLoading(true);
-        const response = await fetch('/api/jobs');
+        
+        // Build the URL with search parameters
+        let url = '/api/jobs';
+        const params = new URLSearchParams();
+        
+        if (debouncedSearchQuery) {
+          params.append('search', debouncedSearchQuery);
+        }
+        
+        if (selectedCategory && selectedCategory !== 'All') {
+          params.append('category', selectedCategory);
+        }
+        
+        // Add the search parameters to the URL if there are any
+        if (params.toString()) {
+          url += `?${params.toString()}`;
+        }
+        
+        console.log('Fetching jobs with URL:', url);
+        
+        const response = await fetch(url);
         if (response.ok) {
           const data = await response.json();
           setJobs(data);
@@ -82,7 +112,7 @@ export default function JobsPage() {
     };
     
     fetchJobs();
-  }, []);
+  }, [debouncedSearchQuery, selectedCategory]);
   
   // Fetch tokenized jobs
   useEffect(() => {
@@ -124,18 +154,8 @@ export default function JobsPage() {
   const jobCategories = Array.from(new Set(jobs.map(job => job.category || 'Uncategorized')));
   const categories = ['All', ...predefinedCategories, ...jobCategories.filter(cat => !predefinedCategories.includes(cat))];
   
-  // Filter jobs based on search query (only job title) and selected category
-  const filteredJobs = jobs.filter(job => {
-    // Filter by search query
-    const matchesQuery = searchQuery.trim() === '' || 
-      (job.title?.toLowerCase() || '').includes(searchQuery.toLowerCase());
-    
-    // Filter by category
-    const matchesCategory = !selectedCategory || selectedCategory === 'All' || 
-      job.category === selectedCategory;
-    
-    return matchesQuery && matchesCategory;
-  });
+  // We no longer need client-side filtering since we're using server-side filtering
+  const filteredJobs = jobs;
   
   const handleInputChange = (e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement | HTMLSelectElement>) => {
     const { name, value } = e.target;
