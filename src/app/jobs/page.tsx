@@ -2,7 +2,7 @@
 
 import { useAuth } from '@/contexts/AuthContext';
 import Link from 'next/link';
-import { useState, useEffect } from 'react';
+import { useState, useEffect, Suspense } from 'react';
 import { useSearchParams } from 'next/navigation';
 
 interface Job {
@@ -17,9 +17,23 @@ interface Job {
   createdBy: string;
 }
 
+function SearchParamsWrapper({ setIsModalOpen }: { setIsModalOpen: (open: boolean) => void }) {
+  const searchParams = useSearchParams();
+  const { isAuthenticated } = useAuth();
+  
+  // Check if createJob query parameter is present
+  useEffect(() => {
+    const createJob = searchParams.get('createJob');
+    if (createJob === 'true' && isAuthenticated) {
+      setIsModalOpen(true);
+    }
+  }, [searchParams, isAuthenticated, setIsModalOpen]);
+  
+  return null;
+}
+
 export default function JobsPage() {
   const { isAuthenticated, token } = useAuth();
-  const searchParams = useSearchParams();
   const [searchQuery, setSearchQuery] = useState('');
   const [selectedCategory, setSelectedCategory] = useState<string | null>(null);
   const [isModalOpen, setIsModalOpen] = useState(false);
@@ -41,13 +55,12 @@ export default function JobsPage() {
   const [logoPreview, setLogoPreview] = useState<string | null>(null);
   const [deleteConfirmJobId, setDeleteConfirmJobId] = useState<string | null>(null);
   
-  // Check if createJob query parameter is present
-  useEffect(() => {
-    const createJob = searchParams.get('createJob');
-    if (createJob === 'true' && isAuthenticated) {
-      setIsModalOpen(true);
-    }
-  }, [searchParams, isAuthenticated]);
+  // Add Suspense boundary for useSearchParams
+  const SearchParamsHandler = () => (
+    <Suspense fallback={<div>Loading...</div>}>
+      <SearchParamsWrapper setIsModalOpen={setIsModalOpen} />
+    </Suspense>
+  );
   
   // Fetch jobs from the backend
   useEffect(() => {

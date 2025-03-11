@@ -29,6 +29,7 @@ const dmSans = DM_Sans({
 export const metadata: Metadata = {
   title: "TrenchedIn",
   description: "Connect your wallet and discover job opportunities in the blockchain space",
+  metadataBase: new URL('http://localhost:3001'),
   icons: {
     icon: '/logo.png',
     apple: '/logo.png',

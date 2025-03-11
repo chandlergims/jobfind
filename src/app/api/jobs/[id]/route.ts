@@ -6,10 +6,10 @@ import { verifyToken } from '@/lib/auth';
 // GET /api/jobs/[id] - Get a specific job by ID
 export async function GET(
   req: NextRequest,
-  { params }: { params: { id: string } }
+  context: { params: { id: string } }
 ) {
   try {
-    const { id } = params;
+    const { id } = context.params;
     
     await dbConnect();
     
@@ -35,10 +35,10 @@ export async function GET(
 // DELETE /api/jobs/[id] - Delete a specific job
 export async function DELETE(
   req: NextRequest,
-  { params }: { params: { id: string } }
+  context: { params: { id: string } }
 ) {
   try {
-    const { id } = params;
+    const { id } = context.params;
     
     // Get the token from the Authorization header
     const authHeader = req.headers.get('Authorization');
