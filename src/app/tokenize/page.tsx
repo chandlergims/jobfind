@@ -107,7 +107,9 @@ export default function TokenizePage() {
     
     // Clear any previous errors
     setTokenizeError('');
+    setAddressError('');
     setTokenizing(true);
+    setSuccess(false);
     
     try {
       const response = await fetch('/api/tokenized-jobs', {
@@ -125,6 +127,8 @@ export default function TokenizePage() {
       const data = await response.json();
       
       if (response.ok) {
+        // Clear any error messages on success
+        setTokenizeError('');
         setTokenizing(false);
         setSuccess(true);
         
@@ -136,6 +140,7 @@ export default function TokenizePage() {
       } else {
         console.error('Tokenization error:', data);
         setTokenizing(false);
+        setSuccess(false);
         
         // If the job is already tokenized, redirect to jobs page
         if (data.error === 'Job is already tokenized') {
@@ -151,6 +156,7 @@ export default function TokenizePage() {
       console.error('Error tokenizing job:', error);
       setTokenizeError('An error occurred while tokenizing the job. Please try again.');
       setTokenizing(false);
+      setSuccess(false);
     }
   };
   
