@@ -146,6 +146,38 @@ export default function TokenizePage() {
         }, 2000); // Increased delay for production environment
       } else {
         console.error('Tokenization error:', data);
+        
+        // Special case: If we get a 500 error but the job might have been tokenized
+        if (response.status === 500) {
+          // Check if the job was actually tokenized despite the error
+          try {
+            // Add a delay to allow the server to complete the tokenization
+            await new Promise(resolve => setTimeout(resolve, 1000));
+            
+            // Check if the job appears in the tokenized jobs list
+            const checkResponse = await fetch('/api/tokenized-jobs');
+            if (checkResponse.ok) {
+              const tokenizedJobs = await checkResponse.json();
+              const isTokenized = tokenizedJobs.some((tj: any) => tj.jobId?._id === selectedJob);
+              
+              if (isTokenized) {
+                // Job was actually tokenized successfully
+                setSuccess(true);
+                setTokenizeError('');
+                setTokenizing(false);
+                
+                // Show success message briefly before redirecting
+                setTimeout(() => {
+                  window.location.href = '/jobs';
+                }, 2000);
+                return;
+              }
+            }
+          } catch (checkError) {
+            console.error('Error checking if job was tokenized:', checkError);
+          }
+        }
+        
         // Ensure we set success to false first
         setSuccess(false);
         setTokenizing(false);
@@ -165,6 +197,35 @@ export default function TokenizePage() {
       }
     } catch (error) {
       console.error('Error tokenizing job:', error);
+      
+      // Check if the job was actually tokenized despite the error
+      try {
+        // Add a delay to allow the server to complete the tokenization
+        await new Promise(resolve => setTimeout(resolve, 1000));
+        
+        // Check if the job appears in the tokenized jobs list
+        const checkResponse = await fetch('/api/tokenized-jobs');
+        if (checkResponse.ok) {
+          const tokenizedJobs = await checkResponse.json();
+          const isTokenized = tokenizedJobs.some((tj: any) => tj.jobId?._id === selectedJob);
+          
+          if (isTokenized) {
+            // Job was actually tokenized successfully
+            setSuccess(true);
+            setTokenizeError('');
+            setTokenizing(false);
+            
+            // Show success message briefly before redirecting
+            setTimeout(() => {
+              window.location.href = '/jobs';
+            }, 2000);
+            return;
+          }
+        }
+      } catch (checkError) {
+        console.error('Error checking if job was tokenized:', checkError);
+      }
+      
       // Ensure we set success to false first
       setSuccess(false);
       setTokenizing(false);

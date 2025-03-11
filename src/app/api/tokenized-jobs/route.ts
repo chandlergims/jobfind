@@ -92,14 +92,45 @@ export async function POST(request: NextRequest) {
       createdBy: payload.id
     });
     
-    await tokenizedJob.save();
+    const savedTokenizedJob = await tokenizedJob.save();
+    console.log('Tokenized job saved successfully:', savedTokenizedJob._id);
     
-    // Populate job details
-    await tokenizedJob.populate('jobId');
+    try {
+      // Attempt to populate job details, but don't fail if it doesn't work
+      await savedTokenizedJob.populate('jobId');
+      console.log('Job details populated successfully');
+    } catch (populateError) {
+      // Log the error but continue
+      console.error('Error populating job details:', populateError);
+      // This is non-critical, so we'll continue
+    }
     
-    return NextResponse.json(tokenizedJob, { status: 201 });
+    // Return success response even if populate failed
+    return NextResponse.json(savedTokenizedJob, { status: 201 });
   } catch (error) {
     console.error('Error creating tokenized job:', error);
+    
+    // Check if the job was actually saved despite the error
+    if (error instanceof Error) {
+      console.error('Error details:', error.message, error.stack);
+    }
+    
+    try {
+      // Try to check if the job was actually tokenized despite the error
+      const body = await request.json().catch(() => ({}));
+      const { jobId } = body;
+      
+      if (jobId) {
+        const existingTokenizedJob = await TokenizedJob.findOne({ jobId }).catch(() => null);
+        if (existingTokenizedJob) {
+          console.log('Job was actually tokenized despite error:', existingTokenizedJob._id);
+          return NextResponse.json(existingTokenizedJob, { status: 201 });
+        }
+      }
+    } catch (checkError) {
+      console.error('Error checking if job was tokenized:', checkError);
+    }
+    
     return NextResponse.json({ error: 'Failed to create tokenized job' }, { status: 500 });
   }
 }
