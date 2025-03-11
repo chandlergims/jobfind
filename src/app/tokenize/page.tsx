@@ -105,13 +105,16 @@ export default function TokenizePage() {
       return;
     }
     
-    // Clear any previous errors
+    // Clear any previous errors and set initial states
     setTokenizeError('');
     setAddressError('');
     setTokenizing(true);
     setSuccess(false);
     
     try {
+      // Add a small delay to ensure UI updates before API call
+      await new Promise(resolve => setTimeout(resolve, 100));
+      
       const response = await fetch('/api/tokenized-jobs', {
         method: 'POST',
         headers: {
@@ -124,23 +127,31 @@ export default function TokenizePage() {
         }),
       });
       
+      // Add a small delay to ensure response is fully processed
+      await new Promise(resolve => setTimeout(resolve, 300));
+      
       const data = await response.json();
       
       if (response.ok) {
+        // Set success state first before clearing other states
+        setSuccess(true);
         // Clear any error messages on success
         setTokenizeError('');
         setTokenizing(false);
-        setSuccess(true);
         
         // Show success message briefly before redirecting
         setTimeout(() => {
           // Redirect to jobs page after successful tokenization
           window.location.href = '/jobs';
-        }, 1500);
+        }, 2000); // Increased delay for production environment
       } else {
         console.error('Tokenization error:', data);
-        setTokenizing(false);
+        // Ensure we set success to false first
         setSuccess(false);
+        setTokenizing(false);
+        
+        // Add a small delay before showing error message
+        await new Promise(resolve => setTimeout(resolve, 200));
         
         // If the job is already tokenized, redirect to jobs page
         if (data.error === 'Job is already tokenized') {
@@ -154,9 +165,13 @@ export default function TokenizePage() {
       }
     } catch (error) {
       console.error('Error tokenizing job:', error);
-      setTokenizeError('An error occurred while tokenizing the job. Please try again.');
-      setTokenizing(false);
+      // Ensure we set success to false first
       setSuccess(false);
+      setTokenizing(false);
+      
+      // Add a small delay before showing error message
+      await new Promise(resolve => setTimeout(resolve, 200));
+      setTokenizeError('An error occurred while tokenizing the job. Please try again.');
     }
   };
   
