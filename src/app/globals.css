@@ -3,6 +3,14 @@
 :root {
   --background: #ffffff;
   --foreground: #171717;
+  
+  /* Sidebar variables */
+  --sidebar: #ffffff;
+  --sidebar-foreground: #171717;
+  --sidebar-active: #171717;
+  --sidebar-accent: rgba(0, 0, 0, 0.05);
+  --sidebar-border: #e5e5e5;
+  --brand-600: #f0b90b;
 }
 
 @theme inline {
@@ -16,6 +24,13 @@
   :root {
     --background: #0a0a0a;
     --foreground: #ededed;
+    
+    /* Dark mode sidebar variables */
+    --sidebar: #0a0a0a;
+    --sidebar-foreground: #ededed;
+    --sidebar-active: #ffffff;
+    --sidebar-accent: rgba(255, 255, 255, 0.1);
+    --sidebar-border: #333333;
   }
 }
 
