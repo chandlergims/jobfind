@@ -494,15 +494,15 @@ export default function JobsPage() {
                   <button
                     type="button"
                     onClick={() => setIsModalOpen(false)}
-                    className="mr-2 px-4 py-2 text-sm font-medium text-gray-700 bg-gray-100 rounded-md hover:bg-gray-200"
-                    style={{ fontFamily: 'var(--font-dm-mono)' }}
+                    className="mr-2 px-4 py-2 text-sm font-medium text-gray-700 bg-gray-100 rounded-md hover:bg-gray-200 cursor-pointer"
+                    style={{ fontFamily: 'var(--font-dm-mono)', cursor: 'pointer' }}
                   >
                     Cancel
                   </button>
                   <button
                     type="submit"
-                    className="px-4 py-2 text-sm font-medium text-white bg-[#d19900] rounded-md hover:bg-[#b38600]"
-                    style={{ fontFamily: 'var(--font-dm-mono)' }}
+                    className="px-4 py-2 text-sm font-medium text-white bg-[#d19900] rounded-md hover:bg-[#b38600] cursor-pointer"
+                    style={{ fontFamily: 'var(--font-dm-mono)', cursor: 'pointer' }}
                   >
                     Create Job
                   </button>
@@ -585,7 +585,7 @@ export default function JobsPage() {
             <button 
               onClick={() => setIsModalOpen(true)}
               className="px-3 py-1 bg-[#d19900] text-white rounded-md hover:bg-[#b38600] transition-colors cursor-pointer"
-              style={{ fontFamily: 'var(--font-dm-mono)' }}
+              style={{ fontFamily: 'var(--font-dm-mono)', cursor: 'pointer' }}
             >
               Create Job
             </button>
