@@ -66,7 +66,7 @@ const Sidebar = () => {
                     className="w-6 h-6" 
                     src="/logo.png"
                   />
-                  <h3 className="text-lg font-bold leading-none mt-0.5" style={{ fontFamily: '"DM Sans", "DM Sans Fallback"' }}>TrenchedIn</h3>
+                  <h3 className="text-lg font-bold leading-none mt-0.5" style={{ fontFamily: '"DM Sans", "DM Sans Fallback"' }}>TrenchLink</h3>
                 </div>
               </Link>
             </div>

@@ -25,13 +25,13 @@ export default function DocumentationPage() {
               <h2 className="text-2xl font-bold text-black" style={{ fontFamily: 'var(--font-dm-sans)' }}>Platform Overview</h2>
                 <div className="prose max-w-none text-black">
                 <p className="text-black mb-4" style={{ fontFamily: 'var(--font-dm-sans)' }}>
-                  TrenchedIn is a centralized hub connecting knowledge seekers with valuable opportunities, empowering professionals to showcase their expertise, and enabling businesses to find exceptional talent for their projects and tasks. When crypto markets experience downturns, finding stable income opportunities becomes crucial for many in the space.
+                  TrenchLink is a centralized hub connecting knowledge seekers with valuable opportunities, empowering professionals to showcase their expertise, and enabling businesses to find exceptional talent for their projects and tasks. When crypto markets experience downturns, finding stable income opportunities becomes crucial for many in the space.
                 </p>
                 
                 <div className="bg-[#d19900]/10 border border-[#d19900] rounded-md p-4 mb-6">
                   <h3 className="text-[#d19900] font-bold mb-2" style={{ fontFamily: 'var(--font-dm-sans)' }}>Market Context</h3>
                   <p className="text-black" style={{ fontFamily: 'var(--font-dm-sans)' }}>
-                    In times of market volatility and downturns, TrenchedIn provides a stable platform for connecting talent with opportunities, ensuring that builders and contributors can continue to earn and grow even when token prices are struggling.
+                    In times of market volatility and downturns, TrenchLink provides a stable platform for connecting talent with opportunities, ensuring that builders and contributors can continue to earn and grow even when token prices are struggling.
                   </p>
                 </div>
                 
@@ -61,7 +61,7 @@ export default function DocumentationPage() {
               <h2 className="text-2xl font-bold text-black" style={{ fontFamily: 'var(--font-dm-sans)' }}>For Job Seekers</h2>
               <div className="prose max-w-none text-black">
                 <p className="text-black mb-4" style={{ fontFamily: 'var(--font-dm-sans)' }}>
-                  TrenchedIn provides multiple ways for crypto professionals to find income opportunities, especially during challenging market conditions.
+                  TrenchLink provides multiple ways for crypto professionals to find income opportunities, especially during challenging market conditions.
                 </p>
                 
                 <h3 className="text-xl font-bold mb-2" style={{ fontFamily: 'var(--font-dm-sans)' }}>Finding Opportunities</h3>
@@ -107,12 +107,12 @@ export default function DocumentationPage() {
               <h2 className="text-2xl font-bold text-black" style={{ fontFamily: 'var(--font-dm-sans)' }}>For Job Posters</h2>
               <div className="prose max-w-none text-black">
                 <p className="text-black mb-4" style={{ fontFamily: 'var(--font-dm-sans)' }}>
-                  TrenchedIn offers a unique platform for companies, projects, and individuals to find qualified talent in the crypto space, with innovative features that go beyond traditional job boards.
+                  TrenchLink offers a unique platform for companies, projects, and individuals to find qualified talent in the crypto space, with innovative features that go beyond traditional job boards.
                 </p>
                 
                 <h3 className="text-xl font-bold mb-2" style={{ fontFamily: 'var(--font-dm-sans)' }}>Creating Job Listings</h3>
                 <p className="text-black mb-4" style={{ fontFamily: 'var(--font-dm-sans)' }}>
-                  Posting a job on TrenchedIn is simple:
+                  Posting a job on TrenchLink is simple:
                 </p>
                 <ol className="list-decimal pl-6 mb-6 space-y-2 text-black">
                   <li style={{ fontFamily: 'var(--font-dm-sans)' }}>Connect your wallet to authenticate</li>
@@ -156,7 +156,7 @@ export default function DocumentationPage() {
               <h2 className="text-2xl font-bold text-black" style={{ fontFamily: 'var(--font-dm-sans)' }}>Job Tokenization</h2>
               <div className="prose max-w-none text-black">
                 <p className="text-black mb-4" style={{ fontFamily: 'var(--font-dm-sans)' }}>
-                  One of TrenchedIn's most innovative features is the ability to tokenize job listings, creating a new economic layer on top of the traditional job marketplace.
+                  One of TrenchLink's most innovative features is the ability to tokenize job listings, creating a new economic layer on top of the traditional job marketplace.
                 </p>
                 
                 <h3 className="text-xl font-bold mb-2" style={{ fontFamily: 'var(--font-dm-sans)' }}>What is Job Tokenization?</h3>
@@ -203,7 +203,7 @@ export default function DocumentationPage() {
               <h2 className="text-2xl font-bold text-black" style={{ fontFamily: 'var(--font-dm-sans)' }}>Rewards System</h2>
               <div className="prose max-w-none text-black">
                 <p className="text-black mb-4" style={{ fontFamily: 'var(--font-dm-sans)' }}>
-                  TrenchedIn features a rewards system designed to incentivize participation and quality contributions to the platform ecosystem, creating additional earning opportunities during challenging market conditions.
+                  TrenchLink features a rewards system designed to incentivize participation and quality contributions to the platform ecosystem, creating additional earning opportunities during challenging market conditions.
                 </p>
                 
                 <h3 className="text-xl font-bold mb-2" style={{ fontFamily: 'var(--font-dm-sans)' }}>Rewards for Job Posters</h3>
@@ -255,7 +255,7 @@ export default function DocumentationPage() {
                 
                 <h3 className="text-xl font-bold mb-2" style={{ fontFamily: 'var(--font-dm-sans)' }}>Economic Resilience</h3>
                 <p className="text-black" style={{ fontFamily: 'var(--font-dm-sans)' }}>
-                  Our rewards system is specifically designed to create economic opportunities during crypto market downturns, providing alternative income streams and value creation mechanisms when traditional crypto investments may be struggling. By participating in the TrenchedIn ecosystem, both job seekers and job posters can maintain activity and potential income even in challenging market conditions.
+                  Our rewards system is specifically designed to create economic opportunities during crypto market downturns, providing alternative income streams and value creation mechanisms when traditional crypto investments may be struggling. By participating in the TrenchLink ecosystem, both job seekers and job posters can maintain activity and potential income even in challenging market conditions.
                 </p>
               </div>
             </div>

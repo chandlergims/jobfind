@@ -15,7 +15,7 @@ export default function Home() {
           className="w-20 h-20" 
         />
         <h1 className="text-2xl font-semibold text-black" style={{ fontFamily: 'var(--font-dm-sans), sans-serif' }}>
-          Welcome to TrenchedIn
+          Welcome to TrenchLink
         </h1>
         <p className="text-center text-gray-600" style={{ fontFamily: 'var(--font-dm-mono), monospace' }}>
           Centralized hub connecting talent with opportunity
