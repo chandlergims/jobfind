@@ -27,7 +27,7 @@ const Navbar = () => {
     <nav className="bg-white text-gray-800 p-4 shadow-sm">
       <div className="w-full px-4 flex justify-between items-center">
         <Link href="/" className="text-xl font-bold">
-          TrenchLink
+          TrenchSeek
         </Link>
         <div className="relative">
           {walletConnected ? (

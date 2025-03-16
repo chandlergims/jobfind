@@ -257,7 +257,7 @@ export function AuthProvider({ children }: { children: ReactNode }) {
       <Modal isOpen={isLoginModalOpen} onClose={() => setIsLoginModalOpen(false)} title="Connect Wallet">
         <div className="w-full">
           <p className="text-center text-gray-700 text-sm mb-6" style={{ fontFamily: 'var(--font-dm-sans)' }}>
-            Connect your wallet to access TrenchLink
+            Connect your wallet to access TrenchSeek
           </p>
           
           {/* Phantom Wallet Button */}
